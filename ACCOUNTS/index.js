@@ -16,6 +16,7 @@ function operation(){
             'Consultar Saldo',
             'Depositar',
             'Sacar',
+            'Transferir',
             'Sair'
             ],
         },
@@ -31,6 +32,8 @@ function operation(){
             depositar();
         }else if(action === 'Sacar'){
             withdraw();
+        }else if(action === 'Transferir'){
+            transferAmount();
         }else if(action === 'Sair'){
             console.log('Obrigado por usar o Account.')
             process.exit();
@@ -104,7 +107,7 @@ function depositar(){
             addAmount(accountName, amount);
             operation()
         })
-        .catch((err)=>console.log());
+        .catch((err)=>console.log(err));
     })
     .catch((err)=>console.log(err));
 };
@@ -135,7 +138,7 @@ function addAmount(accountName, amount){
         },
     )
 
-    console.log(`Foi depositado o valor de R$ ${amount}`)
+    console.log(`Foi depositado o valor de R$ ${amount} para ${accountName}`)
 }
 // obtem os dados da conta
 function getAccount(accountName){
@@ -221,5 +224,80 @@ function removeAmount(accountName, amount){
     )
 
     console.log(`Foi realizado um saque de R$${amount} em sua conta.`)
-    operation();
+    setTimeout(()=>{
+        operation();
+    }, 2000);
+}
+// transferencia de saldo
+function transferAmount(){
+    inquirer.prompt([
+        {
+            name: 'accountName',
+            message: 'Qual a conta que deseja realizar a transferência?'
+        }
+    ])
+    .then((answer)=>{
+        const accountName = answer['accountName']
+
+        if(!accountName){
+            console.log('Conta inválida')
+            return transferAmount();
+        }
+
+        const accountData = getAccount(accountName);
+        const amount = parseFloat(accountData.balance);
+        console.log(`Seu saldo é de R$ ${amount}`); 
+
+        if(amount>0){
+            getAmountTo(accountName, amount);
+        }
+    })
+    .catch((err)=>console.log(err))
+};
+
+function getAccountForTransfer(accountName, amount, amountTo){
+    inquirer.prompt([
+        {
+            name: "accountNameTo",
+            message: "Para qual conta deseja transferir?"
+        }
+    ])
+    .then(async (answer)=>{
+        const accountNameTo = answer['accountNameTo'];
+
+        if(!accountNameTo){
+            console.log('Nome da conta inválido! Por favor verificar.');
+            return 
+        }
+
+        if(!checkAccount(accountNameTo)){
+            return getAccountForTransfer(amountTo)
+        }
+
+        removeAmount(accountName, amountTo);
+        addAmount(accountNameTo, amountTo);
+    })
+    .catch((err)=>console.log(err))
+}
+
+function getAmountTo(accountName, amount){
+    inquirer.prompt([
+        {
+            name: 'amountTo',
+            message: 'Qual o valor para transferir?'
+        }
+    ])
+    .then((answer)=>{
+        const amountTo = answer['amountTo'];
+        if(!amount){
+            console.log('Valor inválido!')
+            return getAmountTo(amount);
+        }
+        if(amountTo > amount){
+            console.log("O valor da tranferência não pode ser maior que seu saldo!")
+            return getAmountTo(amount);
+        }
+
+        getAccountForTransfer(accountName, amount, amountTo);
+    })
 }
