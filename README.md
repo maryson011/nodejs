@@ -5,6 +5,10 @@ a repository created to document learning in node.js
 
 
 
+------------EXPRESS----------------------------------------
+as rotas são um caminho para as funcionalidades da aplicação
+- www.rotas.com/produtos
+
 npm uninstall -> remove pacotes
 
 npm update -> atualiza os pacotes
