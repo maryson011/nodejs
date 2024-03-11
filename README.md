@@ -5,6 +5,11 @@ a repository created to document learning in node.js
 
 
 
+templates engine - handlebars
+- express-hendlebars
+- app.engine('handlebars', exphbs.engine())
+    -> agora é preciso envodar a função engine() de exphbs
+
 ------------EXPRESS----------------------------------------
 as rotas são um caminho para as funcionalidades da aplicação
 - www.rotas.com/produtos

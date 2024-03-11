@@ -1,0 +1,7 @@
+<h1>Olá handlebar</h1>
+<p>O usuário é {{user.name}} {{user.lastName}}, e está estudando o {{learning.framework}}, framework {{learning.lenguage}}</p>
+{{#if auth}}
+    <p>Olá, você já está authenticado. <a href="/dashboard">Clique aqui para ir para o dashboard</a></p>
+    {{else}}
+    <p>Olá, você não está authenticado! Por favor, falar com administrador.</p>
+{{/if}}
