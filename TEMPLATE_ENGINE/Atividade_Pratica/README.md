@@ -1,0 +1,3 @@
+minha resolução:
+
+Tive que quebra um pouco a cabeça na parte de redirecionar a página do produto clicado. Para isso adicionei no main.handlebars um script para chamar a rota confome a div do produto selecionado (clicado), ai fiz a roda obtendo esse valor como params.id, e ai fiz um loop nos dados para identificar qual item corresponde, em seguida mando esse produto para a product.handlebars para ser apresentado.
