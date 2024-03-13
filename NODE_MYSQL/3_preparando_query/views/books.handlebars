@@ -1,0 +1,14 @@
+<h2>Esstes são os livros cadastrados:</h2>
+<a href="/">voltar</a>
+<div class="container">
+    {{#each books}}
+        <a href="/prod/{{this.id}}" class="containers">
+            <di class="containers">
+                <h4>Título</h4>
+                <h3>{{this.title}}</h3>
+                <h4>Páginas</h4>
+                <h3>{{this.pageqty}}</h3>
+            </di>
+        </a>
+    {{/each}}
+</div>
