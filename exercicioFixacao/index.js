@@ -1,6 +1,7 @@
 const express = require('express');
 const exphdb = require('express-handlebars');
 const pool = require('./db/pool');
+const formatarDate = require('./functions')
 const port = 8080;
 
 const app = express();
@@ -48,14 +49,30 @@ app.get('/dashboard', (req, res)=>{
             console.log(err);
             return
         }
-
         
-        let value = 0
+        let value = 0;
          data.forEach((row)=>{
             value = value + parseFloat(row.value);
         })
+
+        console.log(data)
+
+        const newData = [];
         
-        res.render('dashboard', { data, value });
+        data.forEach((row)=>{
+            var date = formatarDate(row.date);
+            newData.push(
+                {
+                    id:row.id,
+                    description:row.description,
+                    category:row.category,
+                    value:row.value,
+                    date:date
+                }
+            )
+        })
+
+        res.render('dashboard', { newData, value });
     })
 })
 
