@@ -1,0 +1,19 @@
+{
+  "name": "exerciciofixacao",
+  "version": "1.0.0",
+  "description": "Esse aquivo contém um mini projeto simples, com o objetivo apenas de exercitar o que foi visto até aqui.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./index.js localhost 8080"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3",
+    "express-handlebars": "^7.1.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.1.0"
+  }
+}

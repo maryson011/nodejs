@@ -1,0 +1,27 @@
+<h1>Dashboard</h1>
+<div class="card">
+    <h3>Total Gasto</h3>
+    <h2>R$ {{value}}</h2>
+</div>
+<div class="table-data">
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Category</th>
+                <th>R$ Value</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{this.description}}</td>
+                <td>{{this.category}}</td>
+                <td>{{this.value}}</td>
+                <td>{{this.date}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
