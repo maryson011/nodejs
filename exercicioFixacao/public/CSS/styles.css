@@ -13,6 +13,9 @@ nav{
     justify-content: space-between;
     align-items: center;
 }
+.menu, .logo{
+    min-width: 20%;
+}
 .menu{
     left: 0;
 }

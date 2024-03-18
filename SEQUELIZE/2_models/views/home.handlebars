@@ -1,0 +1,32 @@
+<h1>Dados do Banco:</h1>
+<div class="table-data">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Occupation</th>
+                <th>Date Created</th>
+                <th>Date Update</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each dataUsers}}
+            <tr>
+                <td><a href="/user/{{this.id}}">{{this.name}}</a></td>
+                <td>{{this.occupation}}</td>
+                <td>{{this.dateCreated}}</td>
+                <td>{{this.update}}</td>
+                <td>
+                    <form action="/user/edit/{{this.id}}" method="GET">
+                        <input type="submit" value="Editar"/>
+                    </form>
+                    <form action="/user/delete/{{this.id}}" method="POST">
+                        <input type="submit" value="Excluir"/>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
