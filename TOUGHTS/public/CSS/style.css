@@ -145,6 +145,10 @@
     align-items: center;
     justify-content: space-between;
   }
+
+  .dashboard a{
+    color: #f6982d;
+  }
   
   .dashboard .label {
     font-weight: bold;
