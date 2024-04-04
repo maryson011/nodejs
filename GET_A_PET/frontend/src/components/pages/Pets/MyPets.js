@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 
 import RoundedImage from '../../layouts/Roundedimage'
 
+import styles from './Dashboard.module.css'
+
 /** hooks */
 import useFlashMessage from '../../../hooks/useFlashMessage'
 
@@ -27,12 +29,40 @@ function MyPets(){
 
     return (
         <section>
-            <div>
+            <div className={styles.petslist_header}>
                 <h1>MyPets</h1>
                 <Link to="/pet/add">Cadastrar Pet</Link>
             </div>
-            <div>
-                {pets.length > 0 && <p>Meus Pets cadastrados</p>}
+            <div className={styles.petslist_container}>
+                {pets.length > 0 && 
+                    pets.map((pet)=> (
+                        <div key={pet._id} className={styles.petlist_row}>
+                            <RoundedImage 
+                                src={`${process.env.REACT_APP_API}/imagens/pets/${pet.imagens[0]}`}
+                                alt={pet.name}
+                                width="px75"
+                            />
+                            <span className='bold'>{pet.name}</span>
+                            <div className={styles.actions}>
+                                {pet.available ? (
+                                    <>
+                                        {pet.adopter && (
+                                            <button className={styles.conclude_btn}>
+                                                Concluir adoção
+                                            </button>
+                                        )}
+                                        <Link to={`/pet/edit/${pet._id}`}>Editar</Link>
+                                        <button>
+                                            Excluir
+                                        </button>
+                                    </>
+                                ): (
+                                    <p>Pet já adotado</p>
+                                )}
+                            </div>
+                        </div>
+                    ))
+                }
                 {pets.length === 0 && <p>Não há Pets cadastrados</p>}
             </div>
         </section>
