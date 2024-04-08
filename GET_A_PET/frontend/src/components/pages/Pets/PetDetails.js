@@ -21,7 +21,32 @@ function PetDetails(){
     }, [id])
 
     return (
-        <h1>{pet.name}</h1>
+        <>
+            {pet.name && (
+                <section className={styles.pet_details_container}>
+                    <div className={styles.petdetails_header}>
+                        <h1>Conhecendo o Pet: {pet.name}</h1>
+                        <p>Marcar uma visita</p>
+                    </div>
+                    <div className={styles.pet_images}>
+                        {pet.imagens.map((image, index)=> (
+                            <img src={`${process.env.REACT_APP_API}/imagens/pets/${image}`} alt={pet.name} key={index}/>
+                        ))}
+                    </div>
+                    <p>
+                        <span className="bold">Peso:</span> {pet.weight}kg
+                    </p>
+                    <p>
+                        <span className="bold">Idade:</span> {pet.age} anos
+                    </p>
+                    {token ? (
+                        <button>Solicitar uma visita</button>
+                    ) : (
+                        <p>Você precisa <Link to="/register">se cadastrar</Link></p>
+                    )}
+                </section>
+            )}
+        </>
     )
 }
 
